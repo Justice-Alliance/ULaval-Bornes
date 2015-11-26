@@ -1,0 +1,111 @@
+/**
+ * \file RegistreBorne.cpp
+ * \brief Implementation de la classe RegistreBorne
+ * \author Pascal Tung
+ * \version 1.0
+ * \date 15/11/08
+ */
+
+#include <sstream>
+#include "RegistreBorne.h"
+
+using namespace std;
+
+namespace tp
+{
+/**
+ * \brief Constructeur de la classe.
+ *      On construit un objet RegistreBorne à partir de données passées
+ *      en paramètre.
+ * \param[in] p_nomRegistreBorne est un string qui represente la version
+ * 		du registre
+ */
+RegistreBorne::RegistreBorne(const string& p_nomRegistreBorne)
+	: m_nomRegistreBorne(p_nomRegistreBorne)
+{
+	PRECONDITION(!p_nomRegistreBorne.empty());
+	POSTCONDITION(m_nomRegistreBorne == p_nomRegistreBorne);
+	INVARIANTS();
+}
+
+/**
+ * Desctructeur de registre borne
+ * un destructeur qui est responsable de désallouer toutes les
+ * Bornes de la liste dans le vecteur.
+ */
+RegistreBorne::~RegistreBorne()
+{
+	for(unsigned i = 0; i < m_vBornes.size(); ++i)
+	{
+		delete m_vBornes[i];
+	}
+
+	m_vBornes.clear();
+}
+
+/**
+ * \brief Cette méthode permet d’ajouter une borne au vecteur de bornes
+ * 		seulement si la borne n’est pas déjà présente dans cette liste.
+ */
+void RegistreBorne::ajouteBorne(const Borne& p_Borne)
+{
+	if(!BorneEstDejaPresente(p_Borne))
+	{
+		m_vBornes.push_back(p_Borne.clone());
+	}
+}
+
+/**
+ * \brief Cette méthode retourne dans un objet std::string les informations
+ * 		formatées concernant le registre de bornes.
+ * \return Un string contenant les informations formatees
+ */
+string RegistreBorne::reqRegistreBorneFormate() const
+{
+	ostringstream oss;
+	oss << "Registre : " << m_nomRegistreBorne << endl;
+
+	vector<Borne*>::const_iterator it;
+	for (it = m_vBornes.begin(); it < m_vBornes.end(); ++it)
+	{
+		oss << (*it)->reqBorneFormate();
+	}
+
+	return oss.str();
+}
+
+/**
+ * \brief Permet de vérifier si la borne n’est pas déjà dans le vecteur
+ * \return Si oui, elle retourne true et false dans le cas contraire.
+ */
+bool RegistreBorne::BorneEstDejaPresente(const Borne& p_borne) const
+{
+	for(unsigned i = 0; i < m_vBornes.size(); ++i)
+	{
+		if ((*m_vBornes[i]) == p_borne)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * \brief Verifie que le nom du registre n'est pas vide
+ */
+void RegistreBorne::verifieInvariant() const
+{
+	INVARIANT(!m_nomRegistreBorne.empty());
+}
+
+/**
+ * \brief La version du registre
+ * \return Un string contenant la version du registre
+ */
+string RegistreBorne::reqNomRegistreBorne() const
+{
+    return m_nomRegistreBorne;
+}
+
+} /* namespace tp */
