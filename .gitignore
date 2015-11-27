@@ -1,4 +1,9 @@
 .metadata/
+Borne/Debug/
+BorneFontaineTesteur/Debug/
+BorneStationnement/Debug/
+BorneTesteur/Debug/
+RegistreBorneTesteur/Debug/
 
 # Compiled Object files
 *.slo
