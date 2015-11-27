@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "ContratException.h"
+#include "BorneDejaPresenteException.h"
 #include "Borne.h"
 
 namespace tp
