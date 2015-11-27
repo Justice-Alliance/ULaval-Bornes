@@ -47,16 +47,6 @@ TEST(BorneFontaine, ConstructeurValideQuebec)
 	ASSERT_EQ("Québec", borneFontaine.reqVille());
 	ASSERT_EQ("Arrondissement", borneFontaine.reqArrondissement());
 }
-TEST(BorneFontaine, DirectionInvalide)
-{
-	ASSERT_THROW(BorneFontaine(10, "North", "Nom topographique", 10.0, 20.0,
-		"Québec", ""), ContratException);
-}
-TEST(BorneFontaine, NomVide)
-{
-	ASSERT_THROW(BorneFontaine(10, "Nord", "", 10.0, 20.0,
-		"Québec", ""), ContratException);
-}
 TEST(BorneFontaine, ArrondissementNonVide)
 {
 	ASSERT_THROW(BorneFontaine(10, "Nord", "Nom topographique", 10.0, 20.0,
