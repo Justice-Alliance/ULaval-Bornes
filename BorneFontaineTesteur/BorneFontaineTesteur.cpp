@@ -1,7 +1,7 @@
 /**
  * \file BorneFontaineTesteur.cpp
  * \brief Testeur de la classe BorneFontaine
- * \author Pascal Tung
+ * \aauthor Pascal Tung
  * \version 1.0
  * \date 15/11/11
  * A tester:
@@ -31,15 +31,38 @@ using namespace util;
  * 		Cas valide : ville et arrondissement initialises
  * 		Cas invalide : arrondissement vide si ville = "Quebec"
  */
-TEST(BorneFontaine, ConstructeurValide)
+TEST(BorneFontaine, ConstructeurValideNonQuebec)
 {
 	BorneFontaine borneFontaine(10, "Nord", "Nom topographique", 10.0, 20.0,
-		"Ville", "Arrondissement");
+		"Ville", "");
 
 	ASSERT_EQ("Ville", borneFontaine.reqVille());
+	ASSERT_EQ("", borneFontaine.reqArrondissement());
+}
+TEST(BorneFontaine, ConstructeurValideQuebec)
+{
+	BorneFontaine borneFontaine(10, "Nord", "Nom topographique", 10.0, 20.0,
+		"Québec", "Arrondissement");
+
+	ASSERT_EQ("Québec", borneFontaine.reqVille());
 	ASSERT_EQ("Arrondissement", borneFontaine.reqArrondissement());
 }
-TEST(BorneFontaine, ArrondissementInvalide)
+TEST(BorneFontaine, DirectionInvalide)
+{
+	ASSERT_THROW(BorneFontaine(10, "North", "Nom topographique", 10.0, 20.0,
+		"Québec", ""), ContratException);
+}
+TEST(BorneFontaine, NomVide)
+{
+	ASSERT_THROW(BorneFontaine(10, "Nord", "", 10.0, 20.0,
+		"Québec", ""), ContratException);
+}
+TEST(BorneFontaine, ArrondissementNonVide)
+{
+	ASSERT_THROW(BorneFontaine(10, "Nord", "Nom topographique", 10.0, 20.0,
+		"Ville", "Arrondissement"), ContratException);
+}
+TEST(BorneFontaine, ArrondissementVide)
 {
 	ASSERT_THROW(BorneFontaine(10, "Nord", "Nom topographique", 10.0, 20.0,
 		"Québec", ""), ContratException);
@@ -53,7 +76,7 @@ class BorneFontaineValide : public ::testing::Test
 public:
 	BorneFontaineValide() :
 		borneFontaineVal(10, "Nord", "Nom topographique", 10.0, 20.0,
-			"Ville", "Arrondissement") {}
+			"Québec", "Arrondissement") {}
 	BorneFontaine borneFontaineVal;
 };
 
@@ -89,7 +112,7 @@ TEST_F(BorneFontaineValide, reqBorneFormate)
  */
 TEST_F(BorneFontaineValide, reqVille)
 {
-	ASSERT_EQ("Ville", borneFontaineVal.reqVille());
+	ASSERT_EQ("Québec", borneFontaineVal.reqVille());
 }
 
 /**

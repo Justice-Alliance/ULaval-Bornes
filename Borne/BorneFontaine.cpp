@@ -38,9 +38,14 @@ BorneFontaine::BorneFontaine(int p_idBorne,
 	: Borne(p_idBorne, p_direction, p_nomTopographique, p_longitude, p_latitude),
 	  m_ville(p_ville), m_arrondissement(p_arrondissement)
 {
+	PRECONDITION(!p_ville.empty());
 	if (m_ville == "Québec")
 	{
 		PRECONDITION(!p_arrondissement.empty());
+	}
+	else
+	{
+		PRECONDITION(p_arrondissement.empty());
 	}
 
 	POSTCONDITION(m_ville == p_ville);
