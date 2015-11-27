@@ -14,6 +14,7 @@
 namespace tp
 {
 /**
+ * \class BorneStationnement
  * \brief La classe BorneStationnement représente les bornes de stationnement
  * 		et de paiement (horodateurs) de la ville de Québec.
  * 		Attributs :

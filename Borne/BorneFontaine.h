@@ -14,6 +14,7 @@
 namespace tp
 {
 /**
+ * \class BorneFontaine
  * \brief La classe BorneFontaine représente les bornes fontaine
  * 		de la ville de Québec.
  * 		Attributs :

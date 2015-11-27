@@ -16,6 +16,7 @@
 namespace tp
 {
 /**
+ * \class RegistreBorne
  * \brief La classe RegistreBorne permet la gestion
  * 		des bornes fontaine et de stationnement.
  * 		Attributs :
