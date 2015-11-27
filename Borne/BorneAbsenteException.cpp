@@ -14,7 +14,7 @@ namespace tp {
 
 /**
  * \brief Constructeur de la classe BorneAbsenteException
- * \param p_raison Le message de l'exception
+ * \param[in] p_raison Le message de l'exception
  */
 BorneAbsenteException::BorneAbsenteException(const string& p_raison)
 	: BorneException(p_raison)

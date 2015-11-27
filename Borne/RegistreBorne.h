@@ -12,6 +12,7 @@
 #include <vector>
 #include "ContratException.h"
 #include "BorneDejaPresenteException.h"
+#include "BorneAbsenteException.h"
 #include "Borne.h"
 
 namespace tp
@@ -32,6 +33,7 @@ public:
 	RegistreBorne(const std::string& p_nomRegistreBorne);
 	~RegistreBorne();
 	void ajouteBorne(const Borne& p_Borne);
+	void supprimeBorne(int p_idBorne);
 	std::string reqRegistreBorneFormate() const;
 	std::string reqNomRegistreBorne() const;
 private:

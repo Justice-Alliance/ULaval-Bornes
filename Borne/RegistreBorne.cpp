@@ -47,6 +47,7 @@ RegistreBorne::~RegistreBorne()
 /**
  * \brief Cette méthode permet d’ajouter une borne au vecteur de bornes
  * 		seulement si la borne n’est pas déjà présente dans cette liste.
+ * \param[in] p_borne : La borne à ajouter.
  */
 void RegistreBorne::ajouteBorne(const Borne& p_Borne)
 {
@@ -61,6 +62,30 @@ void RegistreBorne::ajouteBorne(const Borne& p_Borne)
 
 	INVARIANTS();
 }
+
+/**
+ * \brief Cette méthode supprime une borne de la liste dont
+ * 		l’identifiant (idBorne) est reçu en paramètre.
+ * 		S’il n’y a pas de Borne qui possède cet identifiant
+ * 		dans la liste des bornes, une BorneAbsenteException est lancée
+ * \param[in] p_idBorne : L'identifiant de la borne à supprimer.
+ */
+void RegistreBorne::supprimeBorne(int p_idBorne)
+{
+	vector<Borne*>::iterator it;
+	for (it = m_vBornes.begin(); it < m_vBornes.end(); ++it)
+	{
+		if ((*it)->reqId() == p_idBorne)
+		{
+			delete (*it);
+			m_vBornes.erase(it);
+			return;
+		}
+	}
+
+	throw BorneAbsenteException("Id : "+ p_idBorne);
+}
+
 
 /**
  * \brief Cette méthode retourne dans un objet std::string les informations
@@ -83,6 +108,7 @@ string RegistreBorne::reqRegistreBorneFormate() const
 
 /**
  * \brief Permet de vérifier si la borne n’est pas déjà dans le vecteur
+ * \param[in] p_borne : La borne a tester
  * \return Si oui, elle retourne true et false dans le cas contraire.
  */
 bool RegistreBorne::BorneEstDejaPresente(const Borne& p_borne) const

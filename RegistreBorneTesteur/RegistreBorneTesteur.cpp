@@ -16,7 +16,6 @@
 #include "RegistreBorne.h"
 #include "BorneFontaine.h"
 #include "validationFormat.h"
-#include "BorneDejaPresenteException.h"
 
 using namespace tp;
 using namespace util;
@@ -78,6 +77,31 @@ TEST_F(RegistreBorneValide, ajouteBorneInvalide)
 	ASSERT_NE(oss.str(), registreBorneVal.reqRegistreBorneFormate());
 	ASSERT_THROW(registreBorneVal.ajouteBorne(borne),
 		BorneDejaPresenteException);
+}
+
+/**
+ * \brief Test de la methode void supprimeBorne(int p_idBorne);
+ */
+TEST_F(RegistreBorneValide, supprimeBorneValide)
+{
+	std::ostringstream oss;
+	oss << "Registre : " << registreBorneVal.reqNomRegistreBorne() << std::endl;
+	BorneFontaine borne(10, "Nord", "Nom", 11.1, 22.2,
+			"Québec", "Arrondissement");
+
+	ASSERT_EQ(oss.str(), registreBorneVal.reqRegistreBorneFormate());
+	registreBorneVal.ajouteBorne(borne);
+	ASSERT_NE(oss.str(), registreBorneVal.reqRegistreBorneFormate());
+
+	registreBorneVal.supprimeBorne(10);
+	ASSERT_EQ(oss.str(), registreBorneVal.reqRegistreBorneFormate());
+}
+/**
+ * \brief Test de la methode void supprimeBorne(int p_idBorne);
+ */
+TEST_F(RegistreBorneValide, supprimeBorneInvalide)
+{
+	ASSERT_THROW(registreBorneVal.supprimeBorne(10), BorneAbsenteException);
 }
 
 /**
