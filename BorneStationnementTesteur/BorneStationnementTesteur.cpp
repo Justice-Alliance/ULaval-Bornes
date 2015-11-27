@@ -51,10 +51,30 @@ TEST(borneStationnement, ConstructeurValide)
 	ASSERT_EQ("Sud", borneStationnement.reqCoteRue());
 	ASSERT_TRUE(validerPointCardinal(borneStationnement.reqCoteRue()));
 }
-TEST(BorneStationnement, ConstructeurInvalide)
+TEST(BorneStationnement, TypeInvalide)
 {
 	ASSERT_THROW(BorneStationnement(10, "Nord", "Nom topographique", 10.0, 20.0,
-		"stationement", 0, 0, "", "South"), ContratException);
+		"type", 1.0, 1, "Numero", "Sud"), ContratException);
+}
+TEST(BorneStationnement, LectureInvalide)
+{
+	ASSERT_THROW(BorneStationnement(10, "Nord", "Nom topographique", 10.0, 20.0,
+		"stationement", -1.0, 1, "Numero", "Sud"), ContratException);
+}
+TEST(BorneStationnement, SegmentRueInvalide)
+{
+	ASSERT_THROW(BorneStationnement(10, "Nord", "Nom topographique", 10.0, 20.0,
+		"stationement", 1.0, -2, "Numero", "Sud"), ContratException);
+}
+TEST(BorneStationnement, NumBorneInvalide)
+{
+	ASSERT_THROW(BorneStationnement(10, "Nord", "Nom topographique", 10.0, 20.0,
+		"stationement", 1.0, 1, "", "Sud"), ContratException);
+}
+TEST(BorneStationnement, CoteRueInvalide)
+{
+	ASSERT_THROW(BorneStationnement(10, "Nord", "Nom topographique", 10.0, 20.0,
+		"stationement", 1.0, 1, "Numero", "South"), ContratException);
 }
 
 /**
