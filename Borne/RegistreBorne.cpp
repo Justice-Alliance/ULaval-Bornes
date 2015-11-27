@@ -35,9 +35,10 @@ RegistreBorne::RegistreBorne(const string& p_nomRegistreBorne)
  */
 RegistreBorne::~RegistreBorne()
 {
-	for(unsigned i = 0; i < m_vBornes.size(); ++i)
+	vector<Borne*>::const_iterator it;
+	for (it = m_vBornes.begin(); it < m_vBornes.end(); ++it)
 	{
-		delete m_vBornes[i];
+		delete (*it);
 	}
 
 	m_vBornes.clear();
@@ -82,9 +83,10 @@ string RegistreBorne::reqRegistreBorneFormate() const
  */
 bool RegistreBorne::BorneEstDejaPresente(const Borne& p_borne) const
 {
-	for(unsigned i = 0; i < m_vBornes.size(); ++i)
+	vector<Borne*>::const_iterator it;
+	for (it = m_vBornes.begin(); it < m_vBornes.end(); ++it)
 	{
-		if ((*m_vBornes[i]) == p_borne)
+		if ((**it) == p_borne)
 		{
 			return true;
 		}
