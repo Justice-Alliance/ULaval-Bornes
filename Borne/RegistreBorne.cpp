@@ -53,6 +53,8 @@ void RegistreBorne::ajouteBorne(const Borne& p_Borne)
 	{
 		m_vBornes.push_back(p_Borne.clone());
 	}
+
+	INVARIANTS();
 }
 
 /**
