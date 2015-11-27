@@ -58,7 +58,7 @@ TEST_F(RegistreBorneValide, ajouteBorne)
 
 	ASSERT_EQ(oss.str(), registreBorneVal.reqRegistreBorneFormate());
 	registreBorneVal.ajouteBorne(BorneFontaine(10, "Nord", "Nom", 11.1, 22.2,
-		"Ville", "Arrondissement"));
+		"Québec", "Arrondissement"));
 	ASSERT_NE(oss.str(), registreBorneVal.reqRegistreBorneFormate());
 }
 
@@ -73,7 +73,7 @@ TEST_F(RegistreBorneValide, reqBorneFormate)
 		ASSERT_EQ(oss.str(), registreBorneVal.reqRegistreBorneFormate());
 
 		BorneFontaine borneFontaine(10, "Nord", "Nom", 11.1, 22.2,
-				"Ville", "Arrondissement");
+				"Québec", "Arrondissement");
 		registreBorneVal.ajouteBorne(borneFontaine);
 		ASSERT_EQ(oss.str()+borneFontaine.reqBorneFormate(),
 			registreBorneVal.reqRegistreBorneFormate());
