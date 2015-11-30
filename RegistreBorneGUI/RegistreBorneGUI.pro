@@ -2,12 +2,15 @@ TEMPLATE = app
 TARGET = RegistreBorneGUI
 QT += core \
     gui
-HEADERS += bornefontaineinterface.h \
+HEADERS += bornestationnementinterface.h \
+    bornefontaineinterface.h \
     registrebornegui.h
-SOURCES += bornefontaineinterface.cpp \
+SOURCES += bornestationnementinterface.cpp \
+    bornefontaineinterface.cpp \
     registrebornegui.cpp \
     main.cpp
-FORMS += bornefontaineinterface.ui \
+FORMS += bornestationnementinterface.ui \
+    bornefontaineinterface.ui \
     registrebornegui.ui
 RESOURCES += 
 LIBS += "../Borne/Debug/libBorne.a"
