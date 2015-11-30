@@ -21,11 +21,23 @@ RegistreBorneGUI::RegistreBorneGUI(QWidget *parent)
 		this, SLOT(afficheFontaineForm()));
 	QObject::connect(ui.addStationnementBtn, SIGNAL(pressed()),
 		this, SLOT(afficheStationnementForm()));
+	QObject::connect(ui.deleteBtn, SIGNAL(pressed()),
+		this, SLOT(supprimerBorne()));
 	QObject::connect(ui.quitBtn, SIGNAL(pressed()), this, SLOT(close()));
 }
 
 RegistreBorneGUI::~RegistreBorneGUI()
 {
+}
+
+void RegistreBorneGUI::affichageBorne(Borne* borne)
+{
+	int row = ui.borneTable->rowCount();
+	ui.borneTable->insertRow(row);
+	ui.borneTable->setItem(row, ID,
+		new QTableWidgetItem(QString::number((borne->reqId()))));
+	ui.borneTable->setItem(row, NOM,
+		new QTableWidgetItem(QString(borne->reqNomTopographique().c_str())));
 }
 
 void RegistreBorneGUI::afficheFontaineForm()
@@ -66,12 +78,18 @@ void RegistreBorneGUI::afficheStationnementForm()
 	}
 }
 
-void RegistreBorneGUI::affichageBorne(Borne* borne)
+void RegistreBorneGUI::supprimerBorne()
 {
-	int row = ui.borneTable->rowCount();
-	ui.borneTable->insertRow(row);
-	ui.borneTable->setItem(row, ID,
-		new QTableWidgetItem(QString::number((borne->reqId()))));
-	ui.borneTable->setItem(row, NOM,
-		new QTableWidgetItem(QString(borne->reqNomTopographique().c_str())));
+	QItemSelectionModel *select = ui.borneTable->selectionModel();
+	QList<QTableWidgetItem*> items = ui.borneTable->selectedItems();
+	if (items.empty())
+	{
+		QMessageBox::information(this, "Erreur !",
+			QString("Vous devez selectionner la borne a supprimer"));
+		return;
+	}
+
+	int id = items[0]->text().toInt();
+	registre.supprimeBorne(id);
+	ui.borneTable->removeRow(select->selectedIndexes().at(0).row());
 }

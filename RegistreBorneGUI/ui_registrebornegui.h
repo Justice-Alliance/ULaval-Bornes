@@ -55,6 +55,7 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         borneTable = new QTableWidget(layoutWidget);
         borneTable->setObjectName(QString::fromUtf8("borneTable"));
+        borneTable->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         horizontalLayout->addWidget(borneTable);
 

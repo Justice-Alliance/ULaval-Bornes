@@ -18,6 +18,7 @@ public:
 private slots:
 	void afficheFontaineForm();
 	void afficheStationnementForm();
+	void supprimerBorne();
 
 private:
     Ui::RegistreBorneGUIClass ui;
